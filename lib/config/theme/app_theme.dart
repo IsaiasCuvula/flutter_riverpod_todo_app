@@ -20,22 +20,8 @@ class AppTheme {
     lightIsWhite: false,
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     fontFamily: GoogleFonts.dekko().fontFamily,
-    // subThemesData: const FlexSubThemesData(
-    //   useTextTheme: true,
-    //   fabUseShape: true,
-    //   interactionEffects: true,
-    //   bottomNavigationBarElevation: 0,
-    //   bottomNavigationBarOpacity: 1,
-    //   navigationBarOpacity: 1,
-    //   navigationBarMutedUnselectedIcon: true,
-    //   inputDecoratorIsFilled: true,
-    //   inputDecoratorBorderType: FlexInputBorderType.outline,
-    //   inputDecoratorUnfocusedHasBorder: true,
-    //   blendOnColors: true,
-    //   blendTextTheme: true,
-    //   popupMenuOpacity: 0.95,
-    // ),
   );
+
   static final dark = FlexThemeData.dark(
     scheme: FlexScheme.shark,
     surfaceMode: FlexSurfaceMode.highScaffoldLowSurfacesVariantDialog,
@@ -50,20 +36,5 @@ class AppTheme {
     darkIsTrueBlack: true,
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     fontFamily: GoogleFonts.dekko().fontFamily,
-    // subThemesData: const FlexSubThemesData(
-    //   useTextTheme: true,
-    //   fabUseShape: true,
-    //   interactionEffects: true,
-    //   bottomNavigationBarElevation: 0,
-    //   bottomNavigationBarOpacity: 1,
-    //   navigationBarOpacity: 1,
-    //   navigationBarMutedUnselectedIcon: true,
-    //   inputDecoratorIsFilled: true,
-    //   inputDecoratorBorderType: FlexInputBorderType.outline,
-    //   inputDecoratorUnfocusedHasBorder: true,
-    //   blendOnColors: true,
-    //   blendTextTheme: true,
-    //   popupMenuOpacity: 0.95,
-    // ),
   );
 }
