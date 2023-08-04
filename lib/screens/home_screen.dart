@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
+import 'package:flutter_riverpod_todo_app/widgets/display_white_text.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -16,21 +18,92 @@ class HomeScreen extends StatelessWidget {
     final colors = context.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Container(
-        height: deviceSize.height * 0.3,
-        width: deviceSize.width,
-        color: colors.primary,
-        child: Column(
-          children: [
-            const Text('My Todo List'),
-            Container(
-              height: 20,
-              width: 20,
-              color: colors.secondary,
+      body: Stack(
+        children: [
+          Column(
+            children: [
+              Container(
+                height: deviceSize.height * 0.3,
+                width: deviceSize.width,
+                color: colors.primary,
+                child: const Column(
+                  children: [
+                    Gap(60),
+                    DisplayWhiteText(
+                      text: 'July 26, 2023',
+                      fontWeight: FontWeight.normal,
+                    ),
+                    DisplayWhiteText(text: 'My Todo List', size: 40),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: deviceSize.width,
+                  color: colors.background,
+                ),
+              ),
+            ],
+          ),
+          Positioned(
+            top: 160,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: deviceSize.height * 0.3,
+                    width: deviceSize.width,
+                    decoration: BoxDecoration(
+                      color: colors.primaryContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 20,
+                      padding: const EdgeInsets.all(20),
+                      itemBuilder: (ctx, index) {
+                        return const Text('Run');
+                      },
+                    ),
+                  ),
+                  const Gap(20),
+                  const Text('Completed'),
+                  const Gap(20),
+                  Container(
+                    height: deviceSize.height * 0.25,
+                    width: deviceSize.width,
+                    decoration: BoxDecoration(
+                      color: colors.primaryContainer,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: 20,
+                      padding: const EdgeInsets.all(20),
+                      itemBuilder: (ctx, index) {
+                        return const Text('Run');
+                      },
+                    ),
+                  ),
+                  const Gap(20),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: DisplayWhiteText(
+                        text: 'My Todo List',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
