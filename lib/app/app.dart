@@ -8,13 +8,10 @@ class FlutterRiverpodTodoApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final route = ref.watch(routesProvider);
-    final theme = ref.watch(themeProvider);
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      themeMode: theme,
       theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
       routerConfig: route,
     );
   }
