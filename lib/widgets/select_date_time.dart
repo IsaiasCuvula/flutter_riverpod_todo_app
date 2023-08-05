@@ -59,7 +59,7 @@ class SelectDateTime extends ConsumerWidget {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2022),
+      firstDate: DateTime(2023),
       lastDate: DateTime(2060),
     );
 

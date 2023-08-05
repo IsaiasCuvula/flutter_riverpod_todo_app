@@ -31,9 +31,12 @@ class HomeScreen extends ConsumerWidget {
             header: Column(
               children: [
                 const Gap(60),
-                DisplayWhiteText(
-                  text: DateFormat.yMMMd().format(date),
-                  fontWeight: FontWeight.normal,
+                InkWell(
+                  onTap: () => _selectDate(context, ref),
+                  child: DisplayWhiteText(
+                    text: DateFormat.yMMMd().format(date),
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
                 const DisplayWhiteText(text: 'My Todo List', size: 40),
               ],
@@ -96,5 +99,18 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  void _selectDate(BuildContext context, WidgetRef ref) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2060),
+    );
+
+    if (pickedDate != null) {
+      ref.read(dateProvider.notifier).state = pickedDate;
+    }
   }
 }
