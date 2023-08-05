@@ -32,7 +32,7 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 const Gap(60),
                 InkWell(
-                  onTap: () => _selectDate(context, ref),
+                  onTap: () => Helpers.selectDate(context, ref),
                   child: DisplayWhiteText(
                     text: DateFormat.yMMMd().format(date),
                     fontWeight: FontWeight.normal,
@@ -99,18 +99,5 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  void _selectDate(BuildContext context, WidgetRef ref) async {
-    DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2060),
-    );
-
-    if (pickedDate != null) {
-      ref.read(dateProvider.notifier).state = pickedDate;
-    }
   }
 }
