@@ -34,9 +34,7 @@ class CreateTaskScreen extends StatelessWidget {
               title: 'Task Title',
             ),
             const Gap(30),
-            const Row(
-              children: [Text('Category')],
-            ),
+            const CategoriesSelection(),
             const Gap(30),
             Row(
               children: [
