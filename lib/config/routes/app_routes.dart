@@ -8,4 +8,9 @@ final appRoutes = [
     parentNavigatorKey: navigationKey,
     builder: HomeScreen.builder,
   ),
+  GoRoute(
+    path: RouteLocation.createTask,
+    parentNavigatorKey: navigationKey,
+    builder: CreateTaskScreen.builder,
+  ),
 ];

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_todo_app/config/config.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
@@ -15,35 +16,22 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = context.deviceSize;
-    final colors = context.colorScheme;
 
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            children: [
-              Container(
-                height: deviceSize.height * 0.3,
-                width: deviceSize.width,
-                color: colors.primary,
-                child: const Column(
-                  children: [
-                    Gap(60),
-                    DisplayWhiteText(
-                      text: 'July 26, 2023',
-                      fontWeight: FontWeight.normal,
-                    ),
-                    DisplayWhiteText(text: 'My Todo List', size: 40),
-                  ],
+          AppBackground(
+            headerHeight: deviceSize.height * 0.3,
+            header: const Column(
+              children: [
+                Gap(60),
+                DisplayWhiteText(
+                  text: 'July 26, 2023',
+                  fontWeight: FontWeight.normal,
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  width: deviceSize.width,
-                  color: colors.background,
-                ),
-              ),
-            ],
+                DisplayWhiteText(text: 'My Todo List', size: 40),
+              ],
+            ),
           ),
           Positioned(
             top: 160,
@@ -71,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const Gap(20),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => context.push(RouteLocation.createTask),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: DisplayWhiteText(
