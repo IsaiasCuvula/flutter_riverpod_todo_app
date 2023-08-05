@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
-import 'package:flutter_riverpod_todo_app/widgets/display_white_text.dart';
+import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
@@ -54,40 +54,20 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Container(
-                    height: deviceSize.height * 0.3,
-                    width: deviceSize.width,
-                    decoration: BoxDecoration(
-                      color: colors.primaryContainer,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 20,
-                      padding: const EdgeInsets.all(20),
-                      itemBuilder: (ctx, index) {
-                        return const Text('Run');
-                      },
+                  const DisplayListOfTasks(
+                    tasks: [],
+                  ),
+                  const Gap(20),
+                  Text(
+                    'Completed',
+                    style: context.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   const Gap(20),
-                  const Text('Completed'),
-                  const Gap(20),
-                  Container(
-                    height: deviceSize.height * 0.25,
-                    width: deviceSize.width,
-                    decoration: BoxDecoration(
-                      color: colors.primaryContainer,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 20,
-                      padding: const EdgeInsets.all(20),
-                      itemBuilder: (ctx, index) {
-                        return const Text('Run');
-                      },
-                    ),
+                  const DisplayListOfTasks(
+                    isCompletedTasks: true,
+                    tasks: [],
                   ),
                   const Gap(20),
                   ElevatedButton(
@@ -95,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: DisplayWhiteText(
-                        text: 'My Todo List',
+                        text: 'Add New Task',
                       ),
                     ),
                   ),
