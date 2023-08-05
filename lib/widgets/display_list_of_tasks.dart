@@ -35,7 +35,7 @@ class DisplayListOfTasks extends StatelessWidget {
 
                 return TaskTile(
                   category: TaskCategory.others,
-                  title: task.time,
+                  title: task.title,
                   time: task.time,
                   isCompleted: task.isCompleted,
                 );

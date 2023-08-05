@@ -31,13 +31,15 @@ class CommonTextField extends StatelessWidget {
         const Gap(10),
         TextField(
           readOnly: readOnly,
+          onTapOutside: (event) {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             suffixIcon: suffixIcon,
           ),
           maxLines: maxLines,
-          onChanged: (value) {},
         ),
       ],
     );

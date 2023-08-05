@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/config/config.dart';
+import 'package:flutter_riverpod_todo_app/providers/providers.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(
     BuildContext context,
     GoRouterState state,
@@ -14,22 +17,25 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
+    final tasks = ref.watch(tasksProvider);
+    final date = ref.watch(dateProvider);
+    final completedTasks = ref.watch(completedTasksProvider);
 
     return Scaffold(
       body: Stack(
         children: [
           AppBackground(
             headerHeight: deviceSize.height * 0.3,
-            header: const Column(
+            header: Column(
               children: [
-                Gap(60),
+                const Gap(60),
                 DisplayWhiteText(
-                  text: 'July 26, 2023',
+                  text: DateFormat.yMMMd().format(date),
                   fontWeight: FontWeight.normal,
                 ),
-                DisplayWhiteText(text: 'My Todo List', size: 40),
+                const DisplayWhiteText(text: 'My Todo List', size: 40),
               ],
             ),
           ),
@@ -42,8 +48,16 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const DisplayListOfTasks(
-                    tasks: [],
+                  tasks.when(
+                    data: (tasks) {
+                      return DisplayListOfTasks(
+                        tasks: tasks,
+                      );
+                    },
+                    error: (error, _) => const DisplayErrorMessage(),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   const Gap(20),
                   Text(
@@ -53,9 +67,17 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const Gap(20),
-                  const DisplayListOfTasks(
-                    isCompletedTasks: true,
-                    tasks: [],
+                  completedTasks.when(
+                    data: (completedTasks) {
+                      return DisplayListOfTasks(
+                        isCompletedTasks: true,
+                        tasks: completedTasks,
+                      );
+                    },
+                    error: (error, _) => const DisplayErrorMessage(),
+                    loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
                   const Gap(20),
                   ElevatedButton(

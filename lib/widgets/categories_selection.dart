@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_todo_app/providers/selected_category_provider.dart';
+import 'package:flutter_riverpod_todo_app/providers/category_provider.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
@@ -10,7 +10,7 @@ class CategoriesSelection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategory = ref.watch(selectedCategoryProvider);
+    final selectedCategory = ref.watch(categoryProvider);
     final List<TaskCategory> categories = TaskCategory.values.toList();
 
     return SizedBox(
@@ -32,7 +32,7 @@ class CategoriesSelection extends ConsumerWidget {
 
               return InkWell(
                 onTap: () {
-                  ref.read(selectedCategoryProvider.notifier).state = category;
+                  ref.read(categoryProvider.notifier).state = category;
                 },
                 borderRadius: BorderRadius.circular(30),
                 child: CircleContainer(
