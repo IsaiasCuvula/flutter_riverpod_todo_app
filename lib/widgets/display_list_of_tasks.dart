@@ -35,6 +35,7 @@ class DisplayListOfTasks extends ConsumerWidget {
           : ListView.separated(
               shrinkWrap: true,
               itemCount: tasks.length,
+              padding: EdgeInsets.zero,
               itemBuilder: (ctx, index) {
                 final task = tasks[index];
 
@@ -47,7 +48,7 @@ class DisplayListOfTasks extends ConsumerWidget {
                     );
                   },
                   child: TaskTile(
-                    category: TaskCategory.others,
+                    category: task.category,
                     title: task.title,
                     time: task.time,
                     isCompleted: task.isCompleted,

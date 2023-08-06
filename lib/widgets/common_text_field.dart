@@ -34,6 +34,7 @@ class CommonTextField extends StatelessWidget {
           onTapOutside: (event) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          autocorrect: false,
           controller: controller,
           decoration: InputDecoration(
             hintText: hintText,

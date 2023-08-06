@@ -49,8 +49,8 @@ class AppAlerts {
     AlertDialog alert = AlertDialog(
       title: const Text('Are you sure you want to delete this task?'),
       actions: [
-        cancelButton,
         deleteButton,
+        cancelButton,
       ],
     );
 
