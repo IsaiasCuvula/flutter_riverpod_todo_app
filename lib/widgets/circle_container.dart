@@ -5,9 +5,11 @@ class CircleContainer extends StatelessWidget {
     super.key,
     this.child,
     required this.color,
+    this.borderWidth,
   });
   final Widget? child;
   final Color color;
+  final double? borderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CircleContainer extends StatelessWidget {
         shape: BoxShape.circle,
         color: color,
         border: Border.all(
-          width: 2,
+          width: borderWidth ?? 2,
           color: color,
         ),
       ),

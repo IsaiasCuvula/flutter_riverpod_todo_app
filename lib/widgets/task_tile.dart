@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
+import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
     super.key,
-    required this.category,
-    required this.title,
-    required this.time,
-    required this.isCompleted,
+    required this.task,
     this.onCompleted,
   });
 
-  final TaskCategory category;
-  final String title;
-  final String time;
-  final bool isCompleted;
+  final Task task;
+
   final Function(bool?)? onCompleted;
 
   @override
@@ -24,25 +21,19 @@ class TaskTile extends StatelessWidget {
     final colors = context.colorScheme;
 
     final textDecoration =
-        isCompleted ? TextDecoration.lineThrough : TextDecoration.none;
-    final fontWeight = isCompleted ? FontWeight.normal : FontWeight.bold;
-    final double opacityValue = isCompleted ? 0.1 : 0.3;
+        task.isCompleted ? TextDecoration.lineThrough : TextDecoration.none;
+    final fontWeight = task.isCompleted ? FontWeight.normal : FontWeight.bold;
+    final double opacityValue = task.isCompleted ? 0.1 : 0.7;
 
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 10, bottom: 10),
       child: Row(
         children: [
-          Container(
-            padding: const EdgeInsets.all(9),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: category.color.withOpacity(opacityValue),
-            ),
-            child: Center(
-              child: Icon(
-                category.icon,
-                color: category.color.withOpacity(opacityValue + 0.5),
-              ),
+          CircleContainer(
+            color: task.category.color.withOpacity(opacityValue),
+            child: Icon(
+              task.category.icon,
+              color: colors.primary.withOpacity(opacityValue),
             ),
           ),
           const Gap(16),
@@ -51,7 +42,7 @@ class TaskTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title,
+                task.title,
                 style: style.titleMedium?.copyWith(
                   fontWeight: fontWeight,
                   fontSize: 20,
@@ -59,7 +50,7 @@ class TaskTile extends StatelessWidget {
                 ),
               ),
               Text(
-                time,
+                task.time,
                 style: style.titleMedium?.copyWith(
                   decoration: textDecoration,
                 ),
@@ -67,7 +58,7 @@ class TaskTile extends StatelessWidget {
             ],
           )),
           Checkbox(
-            value: isCompleted,
+            value: task.isCompleted,
             onChanged: onCompleted,
             checkColor: colors.surface,
             fillColor: MaterialStateProperty.resolveWith<Color>(

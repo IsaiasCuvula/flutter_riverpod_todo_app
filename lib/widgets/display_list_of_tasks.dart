@@ -47,11 +47,16 @@ class DisplayListOfTasks extends ConsumerWidget {
                       task: task,
                     );
                   },
+                  onTap: () async {
+                    await showModalBottomSheet(
+                      context: context,
+                      builder: (ctx) {
+                        return TaskDetails(task: task);
+                      },
+                    );
+                  },
                   child: TaskTile(
-                    category: task.category,
-                    title: task.title,
-                    time: task.time,
-                    isCompleted: task.isCompleted,
+                    task: task,
                     onCompleted: (value) async {
                       await ref.read(updateTaskProvider(task).future);
                     },
