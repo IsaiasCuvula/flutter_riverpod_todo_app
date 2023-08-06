@@ -50,7 +50,10 @@ class TaskDetails extends StatelessWidget {
             ),
           ),
           const Gap(16),
-          const Divider(),
+          Divider(
+            color: task.category.color,
+            thickness: 1.5,
+          ),
           const Gap(16),
           Text(
             task.note.isEmpty
