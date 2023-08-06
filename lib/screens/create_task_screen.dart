@@ -44,39 +44,42 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
           text: 'Add New Task',
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CommonTextField(
-              hintText: 'Task Title',
-              title: 'Task Title',
-              controller: _titleController,
-            ),
-            const Gap(30),
-            const CategoriesSelection(),
-            const Gap(30),
-            const SelectDateTime(),
-            const Gap(30),
-            CommonTextField(
-              hintText: 'Notes',
-              title: 'Notes',
-              maxLines: 6,
-              controller: _noteController,
-            ),
-            const Spacer(),
-            ElevatedButton(
-              onPressed: _createTask,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: DisplayWhiteText(
-                  text: 'Save',
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              CommonTextField(
+                hintText: 'Task Title',
+                title: 'Task Title',
+                controller: _titleController,
+              ),
+              const Gap(30),
+              const CategoriesSelection(),
+              const Gap(30),
+              const SelectDateTime(),
+              const Gap(30),
+              CommonTextField(
+                hintText: 'Notes',
+                title: 'Notes',
+                maxLines: 6,
+                controller: _noteController,
+              ),
+              const Gap(30),
+              ElevatedButton(
+                onPressed: _createTask,
+                child: const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: DisplayWhiteText(
+                    text: 'Save',
+                  ),
                 ),
               ),
-            ),
-            const Gap(30)
-          ],
+              const Gap(30),
+            ],
+          ),
         ),
       ),
     );

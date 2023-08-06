@@ -30,55 +30,61 @@ class HomeScreen extends ConsumerWidget {
         children: [
           AppBackground(
             headerHeight: deviceSize.height * 0.3,
-            header: Column(
-              children: [
-                const Gap(60),
-                InkWell(
-                  onTap: () => Helpers.selectDate(context, ref),
-                  child: DisplayWhiteText(
-                    text: DateFormat.yMMMd().format(date),
-                    fontWeight: FontWeight.normal,
+            header: SingleChildScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () => Helpers.selectDate(context, ref),
+                    child: DisplayWhiteText(
+                      text: DateFormat.yMMMd().format(date),
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
-                ),
-                const DisplayWhiteText(text: 'My Todo List', size: 40),
-              ],
+                  const DisplayWhiteText(text: 'My Todo List', size: 40),
+                ],
+              ),
             ),
           ),
           Positioned(
-            top: 160,
+            top: 130,
             left: 0,
             right: 0,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  DisplayListOfTasks(
-                    tasks: inCompletedTasks,
-                  ),
-                  const Gap(20),
-                  Text(
-                    'Completed',
-                    style: context.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
+            child: SafeArea(
+              child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    DisplayListOfTasks(
+                      tasks: inCompletedTasks,
                     ),
-                  ),
-                  const Gap(20),
-                  DisplayListOfTasks(
-                    isCompletedTasks: true,
-                    tasks: completedTasks,
-                  ),
-                  const Gap(20),
-                  ElevatedButton(
-                    onPressed: () => context.push(RouteLocation.createTask),
-                    child: const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: DisplayWhiteText(
-                        text: 'Add New Task',
+                    const Gap(20),
+                    Text(
+                      'Completed',
+                      style: context.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                    const Gap(20),
+                    DisplayListOfTasks(
+                      isCompletedTasks: true,
+                      tasks: completedTasks,
+                    ),
+                    const Gap(20),
+                    ElevatedButton(
+                      onPressed: () => context.push(RouteLocation.createTask),
+                      child: const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: DisplayWhiteText(
+                          text: 'Add New Task',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
