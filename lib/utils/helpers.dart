@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/data/data.dart';
 import 'package:flutter_riverpod_todo_app/providers/providers.dart';
-import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:intl/intl.dart';
 
 @immutable
@@ -23,18 +22,6 @@ class Helpers {
     } catch (e) {
       return '12:00';
     }
-  }
-
-  static displaySnackbar(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: context.textTheme.bodyMedium,
-        ),
-        backgroundColor: context.colorScheme.onSecondary,
-      ),
-    );
   }
 
   static void selectDate(BuildContext context, WidgetRef ref) async {

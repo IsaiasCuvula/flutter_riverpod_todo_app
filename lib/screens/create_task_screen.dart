@@ -99,11 +99,11 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
       );
 
       await ref.read(createTaskProvider(task).future).then((value) {
-        Helpers.displaySnackbar(context, 'Task create successfully');
+        AppAlerts.displaySnackbar(context, 'Task create successfully');
         context.go(RouteLocation.home);
       });
     } else {
-      Helpers.displaySnackbar(context, 'Title cannot be empty');
+      AppAlerts.displaySnackbar(context, 'Title cannot be empty');
     }
   }
 }

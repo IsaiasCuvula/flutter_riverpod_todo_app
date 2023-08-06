@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/data/data.dart';
+import 'package:flutter_riverpod_todo_app/providers/providers.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 
-class DisplayListOfTasks extends StatelessWidget {
+class DisplayListOfTasks extends ConsumerWidget {
   const DisplayListOfTasks({
     super.key,
     this.isCompletedTasks = false,
@@ -13,19 +15,22 @@ class DisplayListOfTasks extends StatelessWidget {
   final List<Task> tasks;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
     final height =
         isCompletedTasks ? deviceSize.height * 0.25 : deviceSize.height * 0.3;
     final emptyTasksAlert = isCompletedTasks
         ? 'There is no completed task yet'
-        : 'There is no tasks yet';
+        : 'There is no tasks to todo!';
 
     return CommonContainer(
       height: height,
       child: tasks.isEmpty
           ? Center(
-              child: DisplayWhiteText(text: emptyTasksAlert),
+              child: Text(
+                emptyTasksAlert,
+                style: context.textTheme.headlineSmall,
+              ),
             )
           : ListView.separated(
               shrinkWrap: true,
@@ -33,11 +38,23 @@ class DisplayListOfTasks extends StatelessWidget {
               itemBuilder: (ctx, index) {
                 final task = tasks[index];
 
-                return TaskTile(
-                  category: TaskCategory.others,
-                  title: task.title,
-                  time: task.time,
-                  isCompleted: task.isCompleted,
+                return InkWell(
+                  onLongPress: () async {
+                    await AppAlerts.showAlertDeleteDialog(
+                      context: context,
+                      ref: ref,
+                      task: task,
+                    );
+                  },
+                  child: TaskTile(
+                    category: TaskCategory.others,
+                    title: task.title,
+                    time: task.time,
+                    isCompleted: task.isCompleted,
+                    onCompleted: (value) async {
+                      await ref.read(updateTaskProvider(task).future);
+                    },
+                  ),
                 );
               },
               separatorBuilder: (context, index) => const Divider(

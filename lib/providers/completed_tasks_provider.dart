@@ -10,12 +10,13 @@ final completedTasksProvider = FutureProvider.autoDispose(
     final allTasks = await repository.getAllTasks();
     final List<Task> filteredTask = [];
     for (var task in allTasks) {
-      final isTaskDay = Helpers.isTaskFromSelectedDate(task, date);
-      if (isTaskDay) {
-        filteredTask.add(task);
+      if (task.isCompleted) {
+        final isTaskDay = Helpers.isTaskFromSelectedDate(task, date);
+        if (isTaskDay) {
+          filteredTask.add(task);
+        }
       }
     }
-
     return filteredTask;
   },
 );
