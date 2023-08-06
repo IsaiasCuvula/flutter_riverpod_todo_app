@@ -32,8 +32,7 @@ class AppAlerts {
     );
     Widget deleteButton = TextButton(
       onPressed: () async {
-        context.pop();
-        await ref.read(deleteTaskProvider(task).future).then(
+        await ref.read(tasksProvider.notifier).deleteTask(task).then(
           (value) {
             AppAlerts.displaySnackbar(
               context,

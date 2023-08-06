@@ -58,7 +58,15 @@ class DisplayListOfTasks extends ConsumerWidget {
                   child: TaskTile(
                     task: task,
                     onCompleted: (value) async {
-                      await ref.read(updateTaskProvider(task).future);
+                      await ref
+                          .read(tasksProvider.notifier)
+                          .updateTask(task)
+                          .then((value) {
+                        AppAlerts.displaySnackbar(
+                          context,
+                          'Task completed',
+                        );
+                      });
                     },
                   ),
                 );

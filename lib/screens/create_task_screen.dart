@@ -98,7 +98,7 @@ class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
         isCompleted: false,
       );
 
-      await ref.read(createTaskProvider(task).future).then((value) {
+      await ref.read(tasksProvider.notifier).createTask(task).then((value) {
         AppAlerts.displaySnackbar(context, 'Task create successfully');
         context.go(RouteLocation.home);
       });

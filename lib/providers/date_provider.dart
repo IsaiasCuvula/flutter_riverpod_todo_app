@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final dateProvider = StateProvider.autoDispose<DateTime>((ref) {
+final dateProvider = StateProvider<DateTime>((ref) {
   return DateTime.now();
 });

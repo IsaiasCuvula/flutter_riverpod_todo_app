@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_todo_app/config/config.dart';
+import 'package:flutter_riverpod_todo_app/data/data.dart';
 import 'package:flutter_riverpod_todo_app/providers/providers.dart';
 import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
@@ -19,9 +20,10 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
-    final tasks = ref.watch(tasksProvider);
     final date = ref.watch(dateProvider);
-    final completedTasks = ref.watch(completedTasksProvider);
+    final taskState = ref.watch(tasksProvider);
+    final inCompletedTasks = _incompltedTask(taskState.tasks, ref);
+    final completedTasks = _compltedTask(taskState.tasks, ref);
 
     return Scaffold(
       body: Stack(
@@ -51,16 +53,8 @@ class HomeScreen extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  tasks.when(
-                    data: (tasks) {
-                      return DisplayListOfTasks(
-                        tasks: tasks,
-                      );
-                    },
-                    error: (error, _) => const DisplayErrorMessage(),
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  DisplayListOfTasks(
+                    tasks: inCompletedTasks,
                   ),
                   const Gap(20),
                   Text(
@@ -70,17 +64,9 @@ class HomeScreen extends ConsumerWidget {
                     ),
                   ),
                   const Gap(20),
-                  completedTasks.when(
-                    data: (completedTasks) {
-                      return DisplayListOfTasks(
-                        isCompletedTasks: true,
-                        tasks: completedTasks,
-                      );
-                    },
-                    error: (error, _) => const DisplayErrorMessage(),
-                    loading: () => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  DisplayListOfTasks(
+                    isCompletedTasks: true,
+                    tasks: completedTasks,
                   ),
                   const Gap(20),
                   ElevatedButton(
@@ -99,5 +85,35 @@ class HomeScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  List<Task> _incompltedTask(List<Task> tasks, WidgetRef ref) {
+    final date = ref.watch(dateProvider);
+    final List<Task> filteredTask = [];
+
+    for (var task in tasks) {
+      if (!task.isCompleted) {
+        final isTaskDay = Helpers.isTaskFromSelectedDate(task, date);
+        if (isTaskDay) {
+          filteredTask.add(task);
+        }
+      }
+    }
+    return filteredTask;
+  }
+
+  List<Task> _compltedTask(List<Task> tasks, WidgetRef ref) {
+    final date = ref.watch(dateProvider);
+    final List<Task> filteredTask = [];
+
+    for (var task in tasks) {
+      if (task.isCompleted) {
+        final isTaskDay = Helpers.isTaskFromSelectedDate(task, date);
+        if (isTaskDay) {
+          filteredTask.add(task);
+        }
+      }
+    }
+    return filteredTask;
   }
 }
