@@ -12,7 +12,6 @@ class TaskDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = context.textTheme;
-    //final colors = context.colorScheme;
 
     return Padding(
       padding: const EdgeInsets.all(30),
@@ -27,24 +26,38 @@ class TaskDetails extends StatelessWidget {
             ),
           ),
           const Gap(16),
-          Column(
-            children: [
-              Text(
-                task.title,
-                style: style.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-              Text(task.time, style: style.titleMedium),
-            ],
+          Text(
+            task.title,
+            style: style.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
+          Text(task.time, style: style.titleMedium),
+          const Gap(16),
+          Visibility(
+            visible: !task.isCompleted,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Task to be completed on '),
+                Text(task.date),
+                Icon(
+                  Icons.check_box,
+                  color: task.category.color,
+                ),
+              ],
+            ),
+          ),
+          const Gap(16),
+          const Divider(),
           const Gap(16),
           Text(
             task.note.isEmpty
                 ? 'There is no additional note for this task'
                 : task.note,
             style: context.textTheme.titleMedium,
+            textAlign: TextAlign.center,
           ),
           const Gap(16),
           Visibility(
@@ -59,7 +72,7 @@ class TaskDetails extends StatelessWidget {
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

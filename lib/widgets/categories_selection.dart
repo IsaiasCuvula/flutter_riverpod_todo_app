@@ -22,31 +22,34 @@ class CategoriesSelection extends ConsumerWidget {
             style: context.textTheme.titleLarge,
           ),
           const Gap(10),
-          ListView.separated(
-            itemCount: categories.length,
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemBuilder: (ctx, index) {
-              final category = categories[index];
+          Expanded(
+            child: ListView.separated(
+              itemCount: categories.length,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemBuilder: (ctx, index) {
+                final category = categories[index];
 
-              return InkWell(
-                onTap: () {
-                  ref.read(categoryProvider.notifier).state = category;
-                },
-                borderRadius: BorderRadius.circular(30),
-                child: CircleContainer(
-                  color: category.color.withOpacity(0.3),
-                  child: Icon(
-                    category.icon,
-                    color: selectedCategory == category
-                        ? context.colorScheme.primary
-                        : category.color.withOpacity(0.5),
+                return InkWell(
+                  onTap: () {
+                    ref.read(categoryProvider.notifier).state = category;
+                  },
+                  borderRadius: BorderRadius.circular(30),
+                  child: CircleContainer(
+                    color: category.color.withOpacity(0.3),
+                    borderColor: category.color,
+                    child: Icon(
+                      category.icon,
+                      color: selectedCategory == category
+                          ? context.colorScheme.primary
+                          : category.color.withOpacity(0.5),
+                    ),
                   ),
-                ),
-              );
-            },
-            separatorBuilder: (context, index) => const Gap(8),
+                );
+              },
+              separatorBuilder: (context, index) => const Gap(8),
+            ),
           ),
         ],
       ),

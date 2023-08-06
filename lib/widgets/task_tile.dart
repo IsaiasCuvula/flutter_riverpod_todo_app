@@ -23,17 +23,19 @@ class TaskTile extends StatelessWidget {
     final textDecoration =
         task.isCompleted ? TextDecoration.lineThrough : TextDecoration.none;
     final fontWeight = task.isCompleted ? FontWeight.normal : FontWeight.bold;
-    final double opacityValue = task.isCompleted ? 0.1 : 0.7;
+    final double iconOpacity = task.isCompleted ? 0.3 : 0.5;
+    final double backgroundOpacity = task.isCompleted ? 0.1 : 0.3;
 
     return Padding(
       padding: const EdgeInsets.only(left: 16, top: 10, bottom: 10),
       child: Row(
         children: [
           CircleContainer(
-            color: task.category.color.withOpacity(opacityValue),
+            borderColor: task.category.color,
+            color: task.category.color.withOpacity(backgroundOpacity),
             child: Icon(
               task.category.icon,
-              color: colors.primary.withOpacity(opacityValue),
+              color: task.category.color.withOpacity(iconOpacity),
             ),
           ),
           const Gap(16),

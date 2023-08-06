@@ -6,10 +6,12 @@ class CircleContainer extends StatelessWidget {
     this.child,
     required this.color,
     this.borderWidth,
+    this.borderColor,
   });
   final Widget? child;
   final Color color;
   final double? borderWidth;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
