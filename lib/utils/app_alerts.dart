@@ -34,7 +34,7 @@ class AppAlerts {
       onPressed: () async {
         await ref.read(tasksProvider.notifier).deleteTask(task).then(
           (value) {
-            AppAlerts.displaySnackbar(
+            displaySnackbar(
               context,
               'Task deleted successfully',
             );
