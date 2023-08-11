@@ -63,14 +63,14 @@ class TaskTile extends StatelessWidget {
             value: task.isCompleted,
             onChanged: onCompleted,
             checkColor: colors.surface,
-            fillColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.disabled)) {
-                  return colors.primary;
-                }
-                return colors.primary;
-              },
-            ),
+            // fillColor: MaterialStateProperty.resolveWith<Color>(
+            //   (Set<MaterialState> states) {
+            //     if (states.contains(MaterialState.disabled)) {
+            //       return colors.primary;
+            //     }
+            //     return colors.primary;
+            //   },
+            // ),
           ),
         ],
       ),

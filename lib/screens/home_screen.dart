@@ -7,7 +7,6 @@ import 'package:flutter_riverpod_todo_app/utils/utils.dart';
 import 'package:flutter_riverpod_todo_app/widgets/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(
@@ -38,7 +37,7 @@ class HomeScreen extends ConsumerWidget {
                   InkWell(
                     onTap: () => Helpers.selectDate(context, ref),
                     child: DisplayWhiteText(
-                      text: DateFormat.yMMMd().format(date),
+                      text: Helpers.dateFormater(date),
                       fontWeight: FontWeight.normal,
                     ),
                   ),
