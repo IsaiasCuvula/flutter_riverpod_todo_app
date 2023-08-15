@@ -37,7 +37,7 @@ class HomeScreen extends ConsumerWidget {
                   InkWell(
                     onTap: () => Helpers.selectDate(context, ref),
                     child: DisplayWhiteText(
-                      text: Helpers.dateFormater(date),
+                      text: Helpers.dateFormatter(date),
                       fontWeight: FontWeight.normal,
                     ),
                   ),

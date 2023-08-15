@@ -19,7 +19,7 @@ class SelectDateTime extends ConsumerWidget {
         Expanded(
           child: CommonTextField(
             title: 'Date',
-            hintText: Helpers.dateFormater(date),
+            hintText: Helpers.dateFormatter(date),
             readOnly: true,
             suffixIcon: IconButton(
               onPressed: () => Helpers.selectDate(context, ref),

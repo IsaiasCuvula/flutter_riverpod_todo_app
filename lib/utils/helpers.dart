@@ -57,7 +57,7 @@ class Helpers {
     }
   }
 
-  static String dateFormater(DateTime date) {
+  static String dateFormatter(DateTime date) {
     try {
       return DateFormat.yMMMd().format(date);
     } catch (e) {
